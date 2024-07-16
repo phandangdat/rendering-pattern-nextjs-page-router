@@ -39,9 +39,7 @@ export default function IncrementalstaticRegeneration({
   );
 }
 export async function getStaticProps() {
-  const res = await fetch(
-    `https://reqres.in/api/users?page=${Math.floor(Math.random() * 2) + 1}`
-  );
+  const res = await fetch(`http://localhost:8080/users?_page=2&_per_page=4`);
   const user = await res.json();
 
   return {

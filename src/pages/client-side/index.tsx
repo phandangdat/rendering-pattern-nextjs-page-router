@@ -8,7 +8,9 @@ export default function ClientSide() {
 
   const fetchData = async () => {
     const response = await fetch(
-      `https://reqres.in/api/users?page=${Math.floor(Math.random() * 2) + 1}`
+      `${process.env.NEXT_PUBLIC_API_URL}/users?_page=${
+        Math.floor(Math.random() * 3) + 1
+      }&_per_page=4`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

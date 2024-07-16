@@ -38,7 +38,9 @@ export default function Home({ user }: { user: { data: IUser[] } }) {
 }
 export async function getServerSideProps() {
   const res = await fetch(
-    `https://reqres.in/api/users?page=${Math.floor(Math.random() * 2) + 1}`
+    `${process.env.NEXT_PUBLIC_API_URL}/users?_page=${
+      Math.floor(Math.random() * 2) + 1
+    }&_per_page=4`
   );
   const user = await res.json();
 

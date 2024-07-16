@@ -40,7 +40,7 @@ export default function StaticSiteGeneration({
 }
 export async function getStaticProps() {
   const res = await fetch(
-    `https://reqres.in/api/users?page=${Math.floor(Math.random() * 2) + 1}`
+    `${process.env.NEXT_PUBLIC_API_URL}/users?_page=1&_per_page=4`
   );
   const user = await res.json();
 
