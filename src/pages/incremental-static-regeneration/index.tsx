@@ -39,13 +39,13 @@ export default function IncrementalstaticRegeneration({
   );
 }
 export async function getStaticProps() {
-  const res = await fetch(`http://localhost:8080/users?_page=2&_per_page=4`);
+  const res = await fetch(`http://localhost:8080/users?_page=1&_per_page=4`);
   const user = await res.json();
 
   return {
     props: {
       user,
-      revalidate: 5,
     },
+    revalidate: 5,
   };
 }
