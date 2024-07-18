@@ -8,15 +8,13 @@ export default function ClientSide() {
 
   const fetchData = async () => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/users?_page=${
-        Math.floor(Math.random() * 3) + 1
-      }&_per_page=4`
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/author`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const result = await response.json();
-    setUser(result.data);
+    setUser(result);
   };
   useEffect(() => {
     fetchData().catch((e) => {
@@ -45,7 +43,7 @@ export default function ClientSide() {
             </figure>
             <div className="card-body">
               <h2 className="card-title">
-                {user.first_name + ' ' + user.last_name}
+                {user.firstName + ' ' + user.lastName}
               </h2>
               <p>{user.email}</p>
             </div>

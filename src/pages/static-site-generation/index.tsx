@@ -7,18 +7,14 @@ export const metadata: Metadata = {
   title: 'Static site page',
   description: 'Rendering pattern',
 };
-export default function StaticSiteGeneration({
-  user,
-}: {
-  user: { data: IUser[] };
-}) {
+export default function StaticSiteGeneration({ user }: { user: IUser[] }) {
   return (
     <Layout>
       <h1 className="text-5xl text-center mb-5 italic">
         Static site generation(SSG)
       </h1>
       <div className="grid grid-cols-2 gap-4">
-        {user?.data.map((user: IUser) => (
+        {user?.map((user: IUser) => (
           <div
             key={user.id}
             className="card card-side bg-base-100 shadow-xl static"
@@ -28,7 +24,7 @@ export default function StaticSiteGeneration({
             </figure>
             <div className="card-body">
               <h2 className="card-title">
-                {user.first_name + ' ' + user.last_name}
+                {user.firstName + ' ' + user.lastName}
               </h2>
               <p>{user.email}</p>
             </div>
@@ -39,9 +35,7 @@ export default function StaticSiteGeneration({
   );
 }
 export async function getStaticProps() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/users?_page=1&_per_page=4`
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/author`);
   const user = await res.json();
 
   return {

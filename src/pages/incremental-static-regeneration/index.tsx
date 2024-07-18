@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function IncrementalstaticRegeneration({
   user,
 }: {
-  user: { data: IUser[] };
+  user: IUser[];
 }) {
   return (
     <Layout>
@@ -18,7 +18,7 @@ export default function IncrementalstaticRegeneration({
         Incremental static regeneration(ISR)
       </h1>
       <div className="grid grid-cols-2 gap-4">
-        {user?.data.map((user: IUser) => (
+        {user?.map((user: IUser) => (
           <div
             key={user.id}
             className="card card-side bg-base-100 shadow-xl static"
@@ -28,7 +28,7 @@ export default function IncrementalstaticRegeneration({
             </figure>
             <div className="card-body">
               <h2 className="card-title">
-                {user.first_name + ' ' + user.last_name}
+                {user.firstName + ' ' + user.lastName}
               </h2>
               <p>{user.email}</p>
             </div>
@@ -39,7 +39,7 @@ export default function IncrementalstaticRegeneration({
   );
 }
 export async function getStaticProps() {
-  const res = await fetch(`http://localhost:8080/users?_page=2&_per_page=4`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/author`);
   const user = await res.json();
 
   return {
